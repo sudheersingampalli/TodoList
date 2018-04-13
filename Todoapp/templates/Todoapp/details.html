@@ -1,0 +1,12 @@
+{%extends 'Todoapp/base.html'%}
+{%block title%}Details{%endblock%}
+{%block body%}
+
+<form>
+Id: {{item.id}}<br>
+Date:  {{item.date}}<br>
+Description: {{item.description}}<br>
+<!-- pending: {{item.pending}}<br> -->
+<!-- Done: {{item.done}}<br> -->
+</form>
+{%endblock%}

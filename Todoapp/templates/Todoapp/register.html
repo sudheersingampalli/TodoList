@@ -1,0 +1,61 @@
+
+{%extends 'Todoapp/base.html'%}
+{%block title%}Register{%endblock%}
+{%block body%}
+
+	<div class="container">
+	 <div class="row">
+    <div class="col-sm">	
+	<h1>Enter the details</h1>
+
+		<form method = "POST">
+
+			{% csrf_token %}
+			{{todoform.as_p}}
+				
+		    <button type = 'submit'>submit</button>
+		</form>
+		<a href="{% url 'list' %}">click here to visit the entire list</a>
+	</div>
+
+
+ 
+    <div class="col-sm">
+	<h1>Today's list is</h1>
+	
+	{%for item in list%}	
+	
+	{% if item.status == '1' %}
+		<div class = "text-danger">
+		{{item.id}}
+		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		</div>
+	{% else %}
+		<div class = "text-success">
+		{{item.id}}
+		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		</div>
+	{% endif %}
+{%endfor%}
+	</div>
+	<div class="col-sm">
+	<h2>Yesterday's List is</h2>
+	{%for item in list_yest%}
+		{% if item.status == '1' %}
+		<div class = "text-danger">
+		{{item.id}}		
+		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		</div>
+	{% else %}
+		<div class = "text-success">
+		{{item.id}}
+		
+		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		
+		</div>
+	{% endif %}
+	{%endfor%}
+	</div>
+</div>
+
+{% endblock %}

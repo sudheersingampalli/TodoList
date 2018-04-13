@@ -1,0 +1,15 @@
+
+{%extends 'Todoapp/base.html'%}
+{%block title%}Details{%endblock%}
+{%block body%}
+
+
+<form action = 'POST'>
+{% csrf_token %}
+Date : {{list_item.date}}<br>
+Description: {{list_item.description}}<br>
+Pending :<input type = 'text' value = '{{list_item.pending}}'> </input><br>
+Done :<input type='text' value='{{list_item.done}}'></input><br>
+<button type='submit' name='save'>Save</button>
+</form>
+{%endblock body%}

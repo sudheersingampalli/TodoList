@@ -1,0 +1,32 @@
+{%extends 'Todoapp/base.html'%}
+{%block title%}List of list todo{%endblock%}
+{%block body%}
+
+<div class="container-fluid">
+
+
+<h1>The list is</h1>
+ 
+
+{%for item in list%}	
+	{% if item.status == '1' %}
+		<div class = "text-danger">
+		{{item.id}}
+		{{item.date}}&nbsp&nbsp&nbsp
+		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		</div>
+	{% else %}
+		<div class = "text-success">
+		{{item.id}}
+		{{item.date}}&nbsp&nbsp&nbsp
+		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		
+		</div>
+	{% endif %}
+{%endfor%}
+
+<form action = "{url 'register'}">
+	<button>create new</button>
+</form>	
+</div>	
+{% endblock %}
