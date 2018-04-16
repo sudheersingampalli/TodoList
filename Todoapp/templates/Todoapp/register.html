@@ -26,36 +26,27 @@
 	{%for item in list%}	
 	
 	{% if item.status == '1' %}
-		<div class = "text-danger">
 		{{item.id}}
-		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
-		</div>
-	{% else %}
-		<div class = "text-success">
+		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+	{% elif item.status == '2' %}
 		{{item.id}}
-		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
-		</div>
+		<a class = "text-success" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+	{% elif item.status == '3' %}
+	{{item.id}}
+		<a class = "text-secondary" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
 	{% endif %}
 {%endfor%}
 	</div>
 	<div class="col-sm">
-	<h2>Yesterday's List is</h2>
-	{%for item in list_yest%}
-		{% if item.status == '1' %}
-		<div class = "text-danger">
-		{{item.id}}		
-		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
-		</div>
-	{% else %}
-		<div class = "text-success">
+	<h2>Pending List is</h2>
+	{%for item in pending_list%}
 		{{item.id}}
 		
-		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
+		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a> <br>
 		
-		</div>
-	{% endif %}
+	
 	{%endfor%}
 	</div>
-</div>
+
 
 {% endblock %}

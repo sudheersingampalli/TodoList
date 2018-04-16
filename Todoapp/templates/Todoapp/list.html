@@ -10,22 +10,25 @@
 
 {%for item in list%}	
 	{% if item.status == '1' %}
-		<div class = "text-danger">
-		{{item.id}}
-		{{item.date}}&nbsp&nbsp&nbsp
-		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
-		</div>
-	{% else %}
-		<div class = "text-success">
-		{{item.id}}
-		{{item.date}}&nbsp&nbsp&nbsp
-		<a href="{%url 'edit' item.pk%}">{{item.description}}</a>
 		
-		</div>
-	{% endif %}
+		{{item.id}}&nbsp&nbsp&nbsp
+		{{item.date}}&nbsp&nbsp&nbsp
+		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a></br>
+		
+	{% elif item.status == '2' %}
+		{{item.id}}&nbsp&nbsp&nbsp
+		{{item.date}}&nbsp&nbsp&nbsp
+		<a class = "text-success" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+		
+	{% elif item.status == '3' %}
+	{{item.id}}&nbsp&nbsp&nbsp
+	{{item.date}}&nbsp&nbsp&nbsp
+		<a class = "text-secondary" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+	{% endif %}	
+	
 {%endfor%}
 
-<form action = "{url 'register'}">
+<form action = "{%url 'register'%}">
 	<button>create new</button>
 </form>	
 </div>	

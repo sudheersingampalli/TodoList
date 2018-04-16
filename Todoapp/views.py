@@ -18,17 +18,18 @@ def register(request):
 			print 'save the item'
 			todoform = Todoform() #just for displaying empty form
 			list = Todomodel.objects.filter(date=datetime.date.today())
-			list_yest = Todomodel.objects.filter(date=datetime.date.today()-timedelta(1))
-			return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'list_yest':list_yest})	
+			pending_list = Todomodel.objects.filter(status='1')
+			return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'pending_list':pending_list})	
 	else:
 		print 'in else part'
 		todoform = Todoform() #just for displaying empty form
 		list = Todomodel.objects.filter(date=datetime.date.today())
 		print datetime.date.today()-timedelta(1)
-		list_yest = Todomodel.objects.filter(date=datetime.date.today()-timedelta(1))
-		return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'list_yest':list_yest})	
+		pending_list = Todomodel.objects.filter(status='1')
+		return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'pending_list':pending_list})	
 
 def list(request):
+	print 'came to list'
 	list = Todomodel.objects.all().order_by('-date')	
 	return render(request,'Todoapp/list.html',{'list':list})
 
