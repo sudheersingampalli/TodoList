@@ -18,7 +18,8 @@ from django.contrib import admin
 from Todoapp import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.register,name='register'),
+    url(r'^$',views.login,name = 'login'),
+    url(r'register',views.register,name='register'),
     url(r'list',views.list,name = 'list'),
     url(r'edit/(?P<item_id>[0-9]+)',views.edit,name = 'edit'),
     url(r'details/(?P<item_id>[0-9]+)',views.details,name = 'details'),

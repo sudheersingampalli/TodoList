@@ -18,8 +18,6 @@
 		<a href="{% url 'list' %}">click here to visit the entire list</a>
 	</div>
 
-
- 
     <div class="col-sm">
 	<h1>Today's list is</h1>
 	
@@ -33,15 +31,17 @@
 		<a class = "text-success" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
 	{% elif item.status == '3' %}
 	{{item.id}}
+
 		<a class = "text-secondary" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+	
 	{% endif %}
-{%endfor%}
+	{%endfor%}
 	</div>
 	<div class="col-sm">
 	<h2>Pending List is</h2>
 	{%for item in pending_list%}
-		{{item.id}}
-		
+		{{item.id}} &nbsp
+		{{item.date}} &nbsp
 		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a> <br>
 		
 	
