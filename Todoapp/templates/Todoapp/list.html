@@ -1,35 +1,36 @@
-{%extends 'Todoapp/base.html'%}
-{%block title%}List of list todo{%endblock%}
+{%extends 'base.html'%}
+{%block title%}List of items todo {%endblock%}
 {%block body%}
 
 <div class="container-fluid">
 
 
-<h1>The list is</h1>
+<h1>Pending Items..</h1>
  
 
 {%for item in list%}	
 	{% if item.status == '1' %}
 		
-		{{item.id}}&nbsp&nbsp&nbsp
+		
 		{{item.date}}&nbsp&nbsp&nbsp
-		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a></br>
+		<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a></br>
 		
 	{% elif item.status == '2' %}
-		{{item.id}}&nbsp&nbsp&nbsp
+		
 		{{item.date}}&nbsp&nbsp&nbsp
-		<a class = "text-success" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+		<a class = "text-success" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
 		
 	{% elif item.status == '3' %}
-	{{item.id}}&nbsp&nbsp&nbsp
+	
 	{{item.date}}&nbsp&nbsp&nbsp
-		<a class = "text-secondary" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
+		<a class = "text-secondary" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
 	{% endif %}	
 	
 {%endfor%}
 
-<form action = "{%url 'register'%}">
-	<button>create new</button>
+<form action = "{%url 'todoapp:register'%}">
+</br></br>
+	<button class="btn btn-primary">Home</button>
 </form>	
 </div>	
 {% endblock %}

@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{%block title%}Login{%endblock%}
+{%block body%}
+
+<h1>Login!</h1>
+
+
+{% if info%}
+{{info}}
+{%endif%}
+
+<form method='POST'>
+ <!-- action="{% url 'accounts:login' %}" -->
+{%csrf_token %}
+
+<!--important for redirecting start-->
+{% if request.GET.next %}
+<input type ='hidden' name='next' value={{request.GET.next}} />
+{% endif %}
+<!--important for redirecting end-->
+Employee ID:
+<br/>
+<input type ='text' name ='username'>
+</br>
+Password:
+<br/>
+<input type = 'password' name='password'/></br></br>
+<input class="btn btn-primary" type ='submit' value='login'/>
+
+
+</form>
+{% endblock %}

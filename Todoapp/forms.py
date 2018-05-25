@@ -6,8 +6,5 @@ class Todoform(forms.ModelForm):
 		model = Todomodel
 		fields = ['date','description','status']
 
-class Loginform(forms.ModelForm):
-	class Meta:
-		model = Todomodel
-		fields = ['employee_num']
+
 

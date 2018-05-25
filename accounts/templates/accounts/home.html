@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body%}
+<h1><center>Welcome!!!. Track your daily activities by logging in!!.</center></h1>
+<h2><center>If you are a new user start Signing in!!.</center></h2>
+<br/><br/>
+<h3><center>Number of Users : {{users}}</center></h3></br>
+<h3><center>Items being tracked   : {{items}}</h3></center></br></br>
+<form method='GET' action="{% url 'todoapp:register' %}">
+	{% csrf_token %}
+	<center><input class="btn btn-primary" type ='submit' value='Home'></input></center>
+</form>
+{% endblock %}	

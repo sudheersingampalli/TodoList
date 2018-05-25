@@ -1,51 +1,64 @@
 
-{%extends 'Todoapp/base.html'%}
+{%extends 'base.html'%}
 {%block title%}Register{%endblock%}
 {%block body%}
-
 	<div class="container">
-	 <div class="row">
-    <div class="col-sm">	
-	<h1>Enter the details</h1>
+		<div class="row">
+		    <div class="col-sm-4">	
+			<h1>Enter the details</h1>
 
-		<form method = "POST">
+				<form method = "POST">
 
-			{% csrf_token %}
-			{{todoform.as_p}}
+					{% csrf_token %}
+					{{todoform.as_p}}
+						
+				    <button class="btn btn-primary" type = 'submit'>submit</button>
+				</form><br/>
+				<a href="{% url 'todoapp:list' %}">Click to visit entire list</a>
+			</div>
+
+		    <div class="col-sm-3">
+			<h1>Today's list</h1>
+			
+			{%for item in list%}	
+				<ul>
+				<li type='circle'>	
+			{% if item.status == '1' %}
 				
-		    <button type = 'submit'>submit</button>
-		</form>
-		<a href="{% url 'list' %}">click here to visit the entire list</a>
-	</div>
+				<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
+			{% elif item.status == '2' %}
+				
+				<a class = "text-success" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
+			{% elif item.status == '3' %}
+			
 
-    <div class="col-sm">
-	<h1>Today's list is</h1>
-	
-	{%for item in list%}	
-	
-	{% if item.status == '1' %}
-		{{item.id}}
-		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
-	{% elif item.status == '2' %}
-		{{item.id}}
-		<a class = "text-success" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
-	{% elif item.status == '3' %}
-	{{item.id}}
+				<a class = "text-secondary" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
+			
+			{% endif %}
+				</li>
+				</ul>
+			{%endfor%}
+			</div>
 
-		<a class = "text-secondary" href="{%url 'edit' item.pk%}">{{item.description}}</a><br>
-	
-	{% endif %}
-	{%endfor%}
-	</div>
-	<div class="col-sm">
-	<h2>Pending List is</h2>
-	{%for item in pending_list%}
-		{{item.id}} &nbsp
-		{{item.date}} &nbsp
-		<a class = "text-danger" href="{%url 'edit' item.pk%}">{{item.description}}</a> <br>
-		
-	
-	{%endfor%}
+			<div class="col-sm-5">
+			<h2>Pending List</h2>
+			{%for item in pending_list%}
+				<ul>
+					
+					<div class ='row'>
+					<li type = 'circle'>
+					<div class ='col-sm-4'>		
+					{{item.date}}
+					</div>
+					<div class = 'col-sm-8'><span class="pull-left">
+					<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a> <br>
+					</div>
+					</li>
+					</div>
+				</ul>
+			{%endfor%}
+			</div>
+		</div>
 	</div>
 
 

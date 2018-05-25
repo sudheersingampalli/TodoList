@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<title>{%block title%}{%endblock%}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" >
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'accounts:home' %}">Todo</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+    	{% if user.is_authenticated %}
+    	<li><h4><font color='white'><center>Hi {{ user.username }}</center></font></h4></li>
+    	<li><a href='#' onclick="document.getElementById('logoutform').submit()">logout</a></li>
+    	<form method ="POST" id ='logoutform'action="{% url 'accounts:logout' %}">
+		 {%csrf_token%}
+		 <input type ='hidden'>   		
+    	</form>
+    	{% else %}
+    	<li><a href="{% url 'accounts:login' %}">Login</a></li>
+    	<li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+    	{% endif %}
+      
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">
+{%block body%}
+{% endblock %}
+</div>
+
+</body>
+</html>
