@@ -21,7 +21,7 @@
     	<li><a href='#' onclick="document.getElementById('logoutform').submit()">logout</a></li>
     	<form method ="POST" id ='logoutform'action="{% url 'accounts:logout' %}">
 		 {%csrf_token%}
-		 <input type ='hidden'>   		
+		 <input type ='hidden'/>   		
     	</form>
     	{% else %}
     	<li><a href="{% url 'accounts:login' %}">Login</a></li>
@@ -32,10 +32,11 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
+  
 {%block body%}
 {% endblock %}
-</div>
 
+</div>
 </body>
 </html>

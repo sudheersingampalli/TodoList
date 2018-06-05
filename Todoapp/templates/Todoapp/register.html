@@ -25,14 +25,14 @@
 				<li type='circle'>	
 			{% if item.status == '1' %}
 				
-				<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
+				<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50" }}</a><br>
 			{% elif item.status == '2' %}
 				
-				<a class = "text-success" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
+				<a class = "text-success" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50" }}</a><br>
 			{% elif item.status == '3' %}
 			
 
-				<a class = "text-secondary" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
+				<a class = "text-secondary" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50" }}</a><br>
 			
 			{% endif %}
 				</li>
@@ -51,7 +51,7 @@
 					{{item.date}}
 					</div>
 					<div class = 'col-sm-8'><span class="pull-left">
-					<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a> <br>
+					<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50" }}</a> <br>
 					</div>
 					</li>
 					</div>

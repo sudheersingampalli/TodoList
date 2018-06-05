@@ -2,35 +2,40 @@
 {%block title%}List of items todo {%endblock%}
 {%block body%}
 
-<div class="container-fluid">
 
 
-<h1>Pending Items..</h1>
- 
 
-{%for item in list%}	
-	{% if item.status == '1' %}
+<h1>LIST</h1>
+ {%for item in list%}	
+	<ul>
+	<li type='circle'>	
+		{% if item.status == '1' %}
+			<div class ='col-sm-2'> {{item.date}} </div>
+			<div class = 'col-sm-10'><span class="pull-left">
+				<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50" }}..</a><br></span>
+			</div>
+
+		{% elif item.status == '2' %}
+			<div class ='col-sm-2'>{{item.date}}</div>
+			<div class = 'col-sm-10'><span class="pull-left">
+			<a class = "text-success" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50" }}..</a><br></span>
+			</div>
 		
-		
-		{{item.date}}&nbsp&nbsp&nbsp
-		<a class = "text-danger" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a></br>
-		
-	{% elif item.status == '2' %}
-		
-		{{item.date}}&nbsp&nbsp&nbsp
-		<a class = "text-success" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
-		
-	{% elif item.status == '3' %}
-	
-	{{item.date}}&nbsp&nbsp&nbsp
-		<a class = "text-secondary" href="{%url 'todoapp:edit' item.pk%}">{{item.description}}</a><br>
-	{% endif %}	
-	
-{%endfor%}
+		{% elif item.status == '3' %}
+			<div class ='col-sm-2'>{{item.date}}</div>
+			<div class = 'col-sm-10'><span class="pull-left">
+			<a class = "text-secondary" href="{%url 'todoapp:edit' item.pk%}">{{item.description|slice:":50"}}..</a><br></span></div>
+		{% endif %}
+	</li>
+    </ul>
+ {%endfor%}
+
+
 
 <form action = "{%url 'todoapp:register'%}">
 </br></br>
 	<button class="btn btn-primary">Home</button>
 </form>	
-</div>	
+
+
 {% endblock %}
