@@ -2,6 +2,10 @@
 {%extends 'base.html'%}
 {%block title%}Register{%endblock%}
 {%block body%}
+
+{%if msg%}
+{{msg}}
+{% endif%}
 	<div class="container">
 		<div class="row">
 		    <div class="col-sm-4">	
