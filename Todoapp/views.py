@@ -31,9 +31,9 @@ def register(request):
 				
 	todoform = Todoform() #just for displaying empty form
 	list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
-	pending_list = Todomodel.objects.filter(status='1',employee_num = request.user)
-	return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'pending_list':pending_list})	
-	
+	pending_list = Todomodel.objects.filter(status='1',employee_num = request.user).order_by('-date')
+	return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'pending_list':pending_list})
+		
 def list(request):
 	#print 'came to list'
 	list = Todomodel.objects.filter(employee_num = request.user).order_by('-date')	
