@@ -3,9 +3,11 @@
 {%block title%}Register{%endblock%}
 {%block body%}
 
-{%if msg%}
-{{msg}}
-{% endif%}
+{% if messages %}
+{% for msg in messages %}
+<li{% if msg.tags %} class="{{ msg.tags }}"{% endif %}>{{ msg }}</li>
+{% endfor %}
+{% endif %}
 	<div class="container">
 		<div class="row">
 		    <div class="col-sm-4">	

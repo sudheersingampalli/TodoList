@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect
 import Todoapp
 from Todoapp.models import Todomodel
+from django.contrib import messages
 
 
 
@@ -26,6 +27,7 @@ def signup(request):
 				login(request, user)
 				return redirect('todoapp:register')
 		else:
+
 			return render(request,'accounts/signup.html',{'error':'Passwords don\'t match'});
 	else:
 		return render(request,'accounts/signup.html');
@@ -43,6 +45,7 @@ def loginview(request):
 			return redirect('todoapp:register')
 			
 		else:
+			messages.error(request, 'incorrect username password')
 			return render(request,'accounts/login.html',{'info':'incorrect username password'});
 	else:
 		return render(request,'accounts/login.html');
