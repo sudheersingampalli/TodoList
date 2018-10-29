@@ -20,15 +20,16 @@ def signup(request):
 		if request.POST['password1']==request.POST['password2']:
 			try:
 				user=User.objects.get(username = request.POST['username'])
-				return render(request,'accounts/signup.html',{'error':'Employee ID already exists'})
+				messages.warning(request,"Employee ID already exists")
+				return render(request,'accounts/signup.html')
 			except User.DoesNotExist:
 				user=User.objects.create_user(request.POST["username"], password=request.POST["password1"])
 				user.backend = 'django.contrib.auth.backends.ModelBackend'
 				login(request, user)
 				return redirect('todoapp:register')
 		else:
-
-			return render(request,'accounts/signup.html',{'error':'Passwords don\'t match'});
+			messages.warning(request,"Passwords do not match")
+			return render(request,'accounts/signup.html');
 	else:
 		return render(request,'accounts/signup.html');
 
@@ -37,16 +38,15 @@ def loginview(request):
 		user = authenticate(username=request.POST.get('username', None),password=request.POST.get('password', None))
 		if user is not None:
 			login(request,user)
+			
 			print ('next is {}',format(request.POST.get('next',None)))
 			if request.POST.get('next',None) is not None:
 				return redirect(request.POST['next'])
-			#return render(request,'accounts/login.html',{'info':'Logged in!!'});
-			#return HttpResponseRedirect('Todoapp/register.html',{'info':'Logged in!!'});
 			return redirect('todoapp:register')
 			
 		else:
 			messages.error(request, 'incorrect username password')
-			return render(request,'accounts/login.html',{'info':'incorrect username password'});
+			return render(request,'accounts/login.html');
 	else:
 		return render(request,'accounts/login.html');
 
