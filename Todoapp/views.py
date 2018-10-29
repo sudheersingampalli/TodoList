@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from models import Todomodel
+from django.shortcuts import render,redirect
+from . models import Todomodel
 import datetime
 from datetime import date
-from forms import Todoform
+from .forms import Todoform
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -59,18 +59,24 @@ def edit(request,item_id=None):
 		#print 'form is valid'
 
 		if request.POST.get('status',None)=='4':
-			item = Todomodel.objects.get(pk=item_id)
-			print 'deleting--->',item
+			#item = Todomodel.objects.get(pk=item_id)
+			item = get_object_or_404(Todomodel,pk = item_id)
+			print ('deleting--->{}',format(item))
 			item.delete()
+			print('item is deleted')
 			todoform = Todoform() #just for displaying empty form
 			list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
 			pending_list = Todomodel.objects.filter(status='1',employee_num = request.user)
-			return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,
-															'pending_list':pending_list,
-															'msg' : 'Deleted successfully!!!'})
+			# return redirect('Todoapp:register')
+			print('before render')
+			return render(request,'Todoapp/register.html')
+			# return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,
+			# 												'pending_list':pending_list,
+			# 												'msg' : 'Deleted successfully!!!'})
 
 		item = todoform.save(commit = False)
 		item.save()
+		print('should not come here')
 		#print 'save the item'
 		list = Todomodel.objects.filter(employee_num = request.user).order_by('-date')	
 		return render(request,'Todoapp/list.html',{'list':list})

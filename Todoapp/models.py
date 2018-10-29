@@ -11,7 +11,7 @@ class Todomodel(models.Model):
 	date = models.DateField(default = date.today()) #date.today()
 	description = models.TextField(max_length = 500,blank=False)
 	status = models.CharField(choices=CHOICES_STATUS,max_length=10,default='Pending')
-	employee_num = models.ForeignKey(User)
+	employee_num = models.ForeignKey(User,on_delete=models.CASCADE)
 	
 	def __str__(self):
 		return str(self.date)+ " " +str(self.description) #+" "+str(self.pending)+" "+str(self.done)

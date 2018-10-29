@@ -11,7 +11,7 @@ from Todoapp.models import Todomodel
 def home(request):
 	no_of_items = Todomodel.objects.latest('id').id
 	no_of_users = User.objects.latest('id').id
-	print no_of_items , no_of_users
+	print ('no_of_items-->{}',format(no_of_users))
 	return render(request,'accounts/home.html',{'users':no_of_users,'items':no_of_items})
 
 def signup(request):
@@ -35,7 +35,7 @@ def loginview(request):
 		user = authenticate(username=request.POST.get('username', None),password=request.POST.get('password', None))
 		if user is not None:
 			login(request,user)
-			print 'next is',request.POST.get('next',None)
+			print ('next is {}',format(request.POST.get('next',None)))
 			if request.POST.get('next',None) is not None:
 				return redirect(request.POST['next'])
 			#return render(request,'accounts/login.html',{'info':'Logged in!!'});
