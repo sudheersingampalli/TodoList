@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from . models import Todomodel
 import datetime
 from datetime import date
@@ -56,10 +56,7 @@ def edit(request,item_id=None):
 				'todoform' : todoform,
 				}
 	if todoform.is_valid():
-		#print 'form is valid'
-
 		if request.POST.get('status',None)=='4':
-			#item = Todomodel.objects.get(pk=item_id)
 			item = get_object_or_404(Todomodel,pk = item_id)
 			print ('deleting--->{}',format(item))
 			item.delete()
@@ -67,17 +64,17 @@ def edit(request,item_id=None):
 			todoform = Todoform() #just for displaying empty form
 			list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
 			pending_list = Todomodel.objects.filter(status='1',employee_num = request.user)
-			# return redirect('Todoapp:register')
 			print('before render')
-			return render(request,'Todoapp/register.html')
-			# return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,
-			# 												'pending_list':pending_list,
-			# 												'msg' : 'Deleted successfully!!!'})
+			context = {
+						'todoform':todoform,'list':list,
+						'pending_list':pending_list,
+						'msg' : 'Deleted successfully!!!'
+						}
+			return redirect('todoapp:register')
 
 		item = todoform.save(commit = False)
 		item.save()
 		print('should not come here')
-		#print 'save the item'
 		list = Todomodel.objects.filter(employee_num = request.user).order_by('-date')	
 		return render(request,'Todoapp/list.html',{'list':list})
 	return render(request,'Todoapp/register.html',context)
