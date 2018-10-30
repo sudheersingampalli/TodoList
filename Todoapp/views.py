@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 # Create your views here.
 
-
+@login_required
 def register(request):
 	if request.method == 'POST': # for a form with data in it
 		todoform = Todoform(request.POST)
