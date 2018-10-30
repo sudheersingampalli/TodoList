@@ -20,14 +20,14 @@
 
 <form method='POST' action="{% url 'accounts:signup' %}">
 {%csrf_token %}
-Employee ID:
+Username
 <br/>
 <input type ='text' name ='username'>
 </br>
-Password:
+Password
 <br/>
 <input type = 'password' name='password1'/></br>
-Confirm Password:
+Confirm Password
 <br/>
 <input type = 'password' name='password2'/></br></br>
 <input class="btn btn-primary" type ='submit' value='Signup!'/>
