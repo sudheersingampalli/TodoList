@@ -20,7 +20,7 @@ def signup(request):
 		if request.POST['password1']==request.POST['password2']:
 			try:
 				user=User.objects.get(username = request.POST['username'])
-				messages.warning(request,"Employee ID already exists")
+				messages.warning(request,"Username already exists")
 				return render(request,'accounts/signup.html')
 			except User.DoesNotExist:
 				user=User.objects.create_user(request.POST["username"], password=request.POST["password1"])
@@ -45,7 +45,7 @@ def loginview(request):
 			return redirect('todoapp:register')
 			
 		else:
-			messages.error(request, 'incorrect username password')
+			messages.error(request, 'Incorrect username password')
 			return render(request,'accounts/login.html');
 	else:
 		return render(request,'accounts/login.html');

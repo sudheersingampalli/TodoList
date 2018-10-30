@@ -16,7 +16,7 @@ def register(request):
 			item = todoform.save(commit = False)
 			item.employee_num = request.user
 			item.save()
-			messages.success(request, 'item saved')
+			messages.success(request, 'Item saved')
 				
 	todoform = Todoform() #just for displaying empty form
 	list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
@@ -43,7 +43,7 @@ def edit(request,item_id=None):
 			item = get_object_or_404(Todomodel,pk = item_id)
 			print ('deleting--->{}',format(item))
 			item.delete()
-			messages.success(request, 'item deleted')
+			messages.success(request, 'Item deleted')
 			todoform = Todoform() #just for displaying empty form
 			list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
 			pending_list = Todomodel.objects.filter(status='1',employee_num = request.user)
@@ -57,7 +57,7 @@ def edit(request,item_id=None):
 
 		item = todoform.save(commit = False)
 		item.save()
-		messages.success(request, 'item modified')
+		messages.success(request, 'Item modified')
 		print('should not come here')
 		list = Todomodel.objects.filter(employee_num = request.user).order_by('-date')	
 		return render(request,'Todoapp/list.html',{'list':list})
