@@ -26,15 +26,15 @@
 <input type ='hidden' name='next' value={{request.GET.next}} />
 {% endif %}
 <!--important for redirecting end-->
-Employee ID:
+Username:
 <br/>
-<input type ='text' name ='username'>
+<input type ='text' name ='username' >
 </br>
 Password:
 <br/>
 <input type = 'password' name='password'/></br></br>
 <input class="btn btn-primary" type ='submit' value='login'/>
-
+<small>No Account ? <a href = "{% url 'accounts:signup' %}" >Singup here!</a></small>
 
 </form>
 {% endblock %}
