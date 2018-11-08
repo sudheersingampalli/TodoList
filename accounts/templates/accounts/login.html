@@ -26,15 +26,15 @@
 <input type ='hidden' name='next' value={{request.GET.next}} />
 {% endif %}
 <!--important for redirecting end-->
-Username:
-<br/>
-<input type ='text' name ='username' >
-</br>
-Password:
-<br/>
-<input type = 'password' name='password'/></br></br>
-<input class="btn btn-primary" type ='submit' value='login'/>
-<small>No Account ? <a href = "{% url 'accounts:signup' %}" >Singup here!</a></small>
 
+<br/>
+<input type ='text' name ='username' placeholder="Username">
+</br>
+
+<br/>
+<input type = 'password' name='password' placeholder="Password"/></br></br>
+<input class="btn btn-primary" type ='submit' value='login'/></br></br>
+<small>No Account ? <a href = "{% url 'accounts:signup' %}" >Singup here!</a></small></br>
+<small>Forgot Password ? <a href = "{% url 'accounts:reset_password' %}" >Reset Password</a></small>
 </form>
 {% endblock %}

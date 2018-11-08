@@ -56,3 +56,25 @@ def logoutview(request):
 		logout(request)
 		return render(request,'accounts/logout.html');
 	return render(request,'accounts/login.html',{'info':'Not yet!!'});
+
+
+def reset_password(request):
+	
+	if request.method == 'POST':
+		
+		if request.POST['password1']==request.POST['password2']:
+			try:
+				user=User.objects.get(username = request.POST['username'])
+				user.set_password(request.POST['password1'])
+				user.save()
+				messages.success(request,"Password changed")
+				return redirect('accounts:login')
+			except User.DoesNotExist:
+				messages.warning(request,"User Does Not Exist")
+				return render(request,'accounts/reset_password.html')
+			
+		else:
+			messages.warning(request,"Passwords do not match")
+			return render(request,'accounts/reset_password.html');
+	else:
+		return render(request,'accounts/reset_password.html');
