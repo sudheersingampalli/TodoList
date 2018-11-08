@@ -38,14 +38,12 @@ def loginview(request):
 		user = authenticate(username=request.POST.get('username', None),password=request.POST.get('password', None))
 		if user is not None:
 			login(request,user)
-			
 			print ('next is {}',format(request.POST.get('next',None)))
 			if request.POST.get('next',None) is not None:
 				return redirect(request.POST['next'])
 			return redirect('todoapp:register')
-			
 		else:
-			messages.error(request, 'Incorrect username password')
+			messages.warning(request, 'Incorrect username password')
 			return render(request,'accounts/login.html');
 	else:
 		return render(request,'accounts/login.html');
@@ -58,10 +56,8 @@ def logoutview(request):
 	return render(request,'accounts/login.html',{'info':'Not yet!!'});
 
 
-def reset_password(request):
-	
+def reset_password(request):	
 	if request.method == 'POST':
-		
 		if request.POST['password1']==request.POST['password2']:
 			try:
 				user=User.objects.get(username = request.POST['username'])
