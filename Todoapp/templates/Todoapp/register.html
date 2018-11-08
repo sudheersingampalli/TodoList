@@ -25,7 +25,7 @@
 					{% csrf_token %}
 					{{todoform.as_p}}
 						
-				    <button class="btn btn-primary" type = 'submit'>submit</button>
+				    <button class="btn btn-primary" type = 'submit'>Submit</button>
 				</form><br/>
 				<a href="{% url 'todoapp:list' %}">Click to visit entire list</a>
 			</div>
