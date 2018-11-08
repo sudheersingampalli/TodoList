@@ -20,17 +20,17 @@
 
 <form method='POST' action="{% url 'accounts:signup' %}">
 {%csrf_token %}
-Username
+
 <br/>
-<input type ='text' name ='username'>
+<input type ='text' name ='username' placeholder="Username">
 </br>
-Password
+
 <br/>
-<input type = 'password' name='password1'/></br>
-Confirm Password
+<input type = 'password' name='password1' placeholder="Password" /></br>
+
 <br/>
-<input type = 'password' name='password2'/></br></br>
-<input class="btn btn-primary" type ='submit' value='Signup!'/>
+<input type = 'password' name='password2' placeholder="Confirm Password" /></br></br>
+<input class="btn btn-primary" type ='submit' value='Signup'/>
 
 
 </form>
