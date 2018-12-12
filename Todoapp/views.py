@@ -17,7 +17,8 @@ def register(request):
 			item.employee_num = request.user
 			item.save()
 			messages.success(request, 'Item saved')
-				
+	# request.session.set_expiry(300)
+	# get_expire_at_browser_close			
 	todoform = Todoform() #just for displaying empty form
 	list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
 	pending_list = Todomodel.objects.filter(status='1',employee_num = request.user).order_by('-date')
@@ -59,6 +60,7 @@ def edit(request,item_id=None):
 		item.save()
 		messages.success(request, 'Item modified')
 		print('should not come here')
-		list = Todomodel.objects.filter(employee_num = request.user).order_by('-date')	
-		return render(request,'Todoapp/list.html',{'list':list})
+		list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
+		pending_list = Todomodel.objects.filter(status='1',employee_num = request.user).order_by('-date')
+		return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'pending_list':pending_list})
 	return render(request,'Todoapp/register.html',context)
