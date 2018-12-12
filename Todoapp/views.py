@@ -62,5 +62,5 @@ def edit(request,item_id=None):
 		print('should not come here')
 		list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
 		pending_list = Todomodel.objects.filter(status='1',employee_num = request.user).order_by('-date')
-		return render (request,'Todoapp/register.html',{'todoform':todoform,'list':list,'pending_list':pending_list})
+		return render (request,'Todoapp/register.html',{'todoform':Todoform(),'list':list,'pending_list':pending_list})
 	return render(request,'Todoapp/register.html',context)
