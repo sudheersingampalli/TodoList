@@ -15,8 +15,12 @@ def register(request):
 		if todoform.is_valid():
 			item = todoform.save(commit = False)
 			item.employee_num = request.user
-			item.save()
-			messages.success(request, 'Item saved')
+			print('request choice-->{}'.format(request.POST['status']))
+			if request.POST['status'] == '4':
+				messages.warning(request, "Cannot delete an item unless it is saved...")
+			else:
+				item.save()
+				messages.success(request, 'Item saved')
 	# request.session.set_expiry(300)
 	# get_expire_at_browser_close			
 	todoform = Todoform() #just for displaying empty form
