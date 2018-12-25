@@ -45,22 +45,33 @@ def edit(request,item_id=None):
 			print ('deleting--->{}',format(item))
 			item.delete()
 			messages.success(request, 'Item deleted')
-			todoform = Todoform() #just for displaying empty form
-			list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
-			pending_list = Todomodel.objects.filter(status='1',employee_num = request.user)
-			print('before render')
-			context = {
-						'todoform':todoform,'list':list,
-						'pending_list':pending_list,
-						'msg' : 'Deleted successfully!!!'
-						}
+			'''
+			A redirect will anyway fetch details from register function. So, no need to declare
+			the variables again.
+			'''
+			# todoform = Todoform() #just for displaying empty form
+			# list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
+			# pending_list = Todomodel.objects.filter(status='1',employee_num = request.user)
+			# print('before render')
+			# context = {
+			# 			'todoform':todoform,'list':list,
+			# 			'pending_list':pending_list,
+			# 			'msg' : 'Deleted successfully!!!'
+			# 			}
 			return redirect('todoapp:register')
 
 		item = todoform.save(commit = False)
 		item.save()
 		messages.success(request, 'Item modified')
-		print('should not come here')
-		list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
-		pending_list = Todomodel.objects.filter(status='1',employee_num = request.user).order_by('-date')
-		return render (request,'Todoapp/register.html',{'todoform':Todoform(),'list':list,'pending_list':pending_list})
+		'''
+		after an item is edited, the url is in still in edit mode. Therefore the subsequest saves 
+		are editing the same object. To over come it, redirect is used and the below variables
+		are commented.
+		'''
+		# print('should not come here')
+		# list = Todomodel.objects.filter(date=datetime.date.today(),employee_num = request.user)
+		# pending_list = Todomodel.objects.filter(status='1',employee_num = request.user).order_by('-date')
+		#return render (request,'Todoapp/register.html',{'todoform':Todoform(),'list':list,'pending_list':pending_list})
+		return redirect('todoapp:register') 
+
 	return render(request,'Todoapp/register.html',context)
